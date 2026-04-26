@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Todo</title>
+</head>
+<body>
+
+<h1>Sửa công việc</h1>
+
+<form th:action="@{/update}" th:object="${todo}" method="post">
+
+    <!-- QUAN TRỌNG -->
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        Content:
+        <input type="text" th:field="*{content}">
+        <span style="color:red"
+              th:if="${#fields.hasErrors('content')}"
+              th:errors="*{content}">
+        </span>
+    </div>
+
+    <br>
+
+    <div>
+        Due Date:
+        <input type="date" th:field="*{dueDate}">
+        <span style="color:red"
+              th:if="${#fields.hasErrors('dueDate')}"
+              th:errors="*{dueDate}">
+        </span>
+    </div>
+
+    <br>
+
+    <div>
+        Status:
+        <input type="text" th:field="*{status}">
+    </div>
+
+    <br>
+
+    <div>
+        Priority:
+        <input type="text" th:field="*{priority}">
+    </div>
+
+    <br>
+
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>
