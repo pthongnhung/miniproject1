@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Todo List</title>
+    <title th:text="#{title}"></title>
 </head>
 <body>
 
-<h1>Danh sách công việc</h1>
+<!-- đổi ngôn ngữ -->
+<a href="?lang=vi">Tiếng Việt</a>
+<a href="?lang=en">English</a>
 
-<a th:href="@{/add}">Thêm mới</a>
+<br><br>
+
+<!-- hiển thị owner -->
+<h2>
+    Danh sách của:
+    <span th:text="${ownerName}"></span>
+</h2>
+
+<!-- thông báo -->
+<div th:if="${message}">
+    <p style="color: green" th:text="${message}"></p>
+</div>
+
+<h1 th:text="#{list}"></h1>
+
+<a th:href="@{/add}" th:text="#{add}"></a>
 
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Content</th>
-        <th>Due Date</th>
-        <th>Status</th>
-        <th>Priority</th>
+        <th th:text="#{content}"></th>
+        <th th:text="#{dueDate}"></th>
+        <th th:text="#{status}"></th>
+        <th th:text="#{priority}"></th>
+        <th th:text="#{action}"></th>
     </tr>
 
     <tr th:each="todo : ${todos}">
@@ -26,11 +44,13 @@
         <td th:text="${todo.priority}"></td>
 
         <td>
-            <a th:href="@{/edit/{id}(id=${todo.id})}">Sửa</a>
+            <a th:href="@{/edit/{id}(id=${todo.id})}"
+               th:text="#{edit}">
+            </a>
 
             <a th:href="@{/delete/{id}(id=${todo.id})}"
-               onclick="return confirm('Bạn có chắc muốn xóa không?')">
-                Xóa
+               onclick="return confirm('Bạn có chắc muốn xóa không?')"
+               th:text="#{delete}">
             </a>
         </td>
     </tr>
